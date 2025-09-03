@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReadX News - Live Economic Updates</title>
+    <meta name="description" content="Real-time economic news from trusted sources worldwide">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; script-src 'self' 'unsafe-inline'; connect-src 'self' https:;">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #1C1C1C;
+            background: linear-gradient(135deg, #F5F5F5 0%, #A8C9B7 20%, #F5F5F5 100%);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2F4F4F 0%, #3A4A77 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+        }
+        
+        .logo::before {
+            content: "📊";
+            margin-right: 10px;
+            font-size: 2rem;
+        }
+        
+        .filters {
+            padding: 20px 0;
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .filter-chips {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+        
+        .chip {
+            padding: 8px 16px;
+            background: #f3f4f6;
+            border: 1px solid #d1d5db;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 14px;
+        }
+        
+        .chip:hover {
+            background: #e5e7eb;
+        }
+        
+        .chip.active {
+            background: #2F4F4F;
+            color: white;
+            border-color: #2F4F4F;
+        }
+        
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            padding: 20px 0;
+        }
+        
+        .news-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border: 1px solid #e5e7eb;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+        
+        .news-source {
+            display: inline-block;
+            background: #2F4F4F;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        
+        .news-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+        
+        .news-summary {
+            color: #6b7280;
+            font-size: 14px;
+            line-height: 1.4;
+            margin-bottom: 12px;
+        }
+        
+        .news-date {
+            color: #9ca3af;
+            font-size: 12px;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #6b7280;
+        }
+        
+        .error {
+            text-align: center;
+            padding: 40px;
+            color: #dc2626;
+        }
+        
+        @media (max-width: 768px) {
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .filter-chips {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo">ReadX Economic News</a>
+                <nav>
+                    <a href="/" style="color: white; text-decoration: none; margin-left: 20px;">Home</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="filters">
+        <div class="container">
+            <div class="filter-chips">
+                <div class="chip active" data-region="all">All Regions</div>
+                <div class="chip" data-region="us">United States</div>
+                <div class="chip" data-region="eu">Europe</div>
+                <div class="chip" data-region="uk">United Kingdom</div>
+                <div class="chip" data-region="asia">Asia Pacific</div>
+                <div class="chip" data-region="emerging">Emerging Markets</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div id="news-container">
+            <div class="loading">Loading economic news...</div>
+        </div>
+    </div>
+
+    <script>
+        const newsContainer = document.getElementById('news-container');
+        const filterChips = document.querySelectorAll('.chip');
+        let currentRegion = 'all';
+
+        // Mock news data (in real implementation, this would come from RSS feeds)
+        const mockNews = [
+            {
+                source: 'Federal Reserve',
+                title: 'Fed Signals Potential Rate Cuts in 2024',
+                summary: 'Federal Reserve officials indicate possible interest rate reductions as inflation shows signs of cooling.',
+                date: new Date(),
+                region: 'us'
+            },
+            {
+                source: 'ECB',
+                title: 'European Central Bank Maintains Steady Policy',
+                summary: 'ECB keeps rates unchanged while monitoring eurozone economic indicators.',
+                date: new Date(Date.now() - 3600000),
+                region: 'eu'
+            },
+            {
+                source: 'Bank of England',
+                title: 'UK Inflation Drops to Target Range',
+                summary: 'British inflation falls to 2.1%, giving Bank of England room for policy adjustments.',
+                date: new Date(Date.now() - 7200000),
+                region: 'uk'
+            },
+            {
+                source: 'Bank of Japan',
+                title: 'Japan Considers Policy Normalization',
+                summary: 'BOJ hints at potential changes to ultra-loose monetary policy amid economic recovery.',
+                date: new Date(Date.now() - 10800000),
+                region: 'asia'
+            },
+            {
+                source: 'Central Bank News',
+                title: 'Emerging Markets Face Currency Pressures',
+                summary: 'Several developing economies adjust monetary policy to address currency volatility.',
+                date: new Date(Date.now() - 14400000),
+                region: 'emerging'
+            }
+        ];
+
+        function formatDate(date) {
+            return new Intl.DateTimeFormat('en-US', {
+                month: 'short',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            }).format(date);
+        }
+
+        function renderNews(region = 'all') {
+            const filteredNews = region === 'all' ? mockNews : mockNews.filter(item => item.region === region);
+            
+            if (filteredNews.length === 0) {
+                newsContainer.innerHTML = '<div class="error">No news available for this region.</div>';
+                return;
+            }
+
+            const newsHTML = filteredNews.map(item => `
+                <div class="news-card">
+                    <div class="news-source">${item.source}</div>
+                    <div class="news-title">${item.title}</div>
+                    <div class="news-summary">${item.summary}</div>
+                    <div class="news-date">${formatDate(item.date)}</div>
+                </div>
+            `).join('');
+
+            newsContainer.innerHTML = `<div class="news-grid">${newsHTML}</div>`;
+        }
+
+        // Filter functionality
+        filterChips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                filterChips.forEach(c => c.classList.remove('active'));
+                chip.classList.add('active');
+                currentRegion = chip.dataset.region;
+                renderNews(currentRegion);
+            });
+        });
+
+        // Initial load
+        setTimeout(() => renderNews(), 1000);
+
+        // Auto-refresh every 5 minutes
+        setInterval(() => {
+            if (document.visibilityState === 'visible') {
+                renderNews(currentRegion);
+            }
+        }, 300000);
+    </script>
+</body>
+</html>
