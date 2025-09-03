@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReadX Demo - All Features</title>
+    <meta name="description" content="Interactive demo of ReadX Economic News app features">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; script-src 'self' 'unsafe-inline';">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #1C1C1C;
+            background: linear-gradient(135deg, #F5F5F5 0%, #A8C9B7 20%, #F5F5F5 100%);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2F4F4F 0%, #3A4A77 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+        }
+        
+        .logo::before {
+            content: "📊";
+            margin-right: 10px;
+            font-size: 2rem;
+        }
+        
+        .demo-section {
+            margin: 40px 0;
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .section-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #2F4F4F;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .feature-card {
+            background: #F8FAFC;
+            border: 1px solid #E5E7EB;
+            border-radius: 12px;
+            padding: 20px;
+            transition: transform 0.2s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-2px);
+        }
+        
+        .chip {
+            display: inline-block;
+            padding: 6px 12px;
+            background: #2F4F4F;
+            color: white;
+            border-radius: 16px;
+            font-size: 12px;
+            margin: 4px;
+            cursor: pointer;
+        }
+        
+        .chip.active {
+            background: #D97B40;
+        }
+        
+        .rate-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            background: #F3F4F6;
+            border-radius: 8px;
+            margin: 8px 0;
+        }
+        
+        .rate-value {
+            font-weight: 600;
+            color: #2F4F4F;
+        }
+        
+        .news-item {
+            border-left: 4px solid #2F4F4F;
+            padding: 16px;
+            margin: 12px 0;
+            background: #F9FAFB;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .news-source {
+            font-size: 12px;
+            color: #6B7280;
+            font-weight: 600;
+        }
+        
+        .news-title {
+            font-weight: 600;
+            margin: 8px 0;
+        }
+        
+        .scenario-card {
+            background: linear-gradient(135deg, #F3F4F6 0%, #E5E7EB 100%);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 12px 0;
+            border-left: 4px solid #D97B40;
+        }
+        
+        .scenario-title {
+            font-weight: 600;
+            color: #2F4F4F;
+            margin-bottom: 8px;
+        }
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+        
+        .metric-card {
+            background: linear-gradient(135deg, #2F4F4F 0%, #3A4A77 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .metric-value {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .metric-label {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .theme-selector {
+            display: flex;
+            gap: 12px;
+            margin: 16px 0;
+        }
+        
+        .theme-btn {
+            padding: 8px 16px;
+            border: 2px solid #E5E7EB;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .theme-btn.active {
+            border-color: #2F4F4F;
+            background: #2F4F4F;
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .dashboard-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="/" class="logo">ReadX Economic News - Interactive Demo</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Regional News Filtering -->
+        <div class="demo-section">
+            <div class="section-title">
+                🌍 Regional News Filtering
+            </div>
+            <p>Filter economic news by geographic regions and countries:</p>
+            <div style="margin: 16px 0;">
+                <div class="chip active" onclick="filterNews('all')">Global News</div>
+                <div class="chip" onclick="filterNews('us')">United States</div>
+                <div class="chip" onclick="filterNews('eu')">Europe</div>
+                <div class="chip" onclick="filterNews('uk')">United Kingdom</div>
+                <div class="chip" onclick="filterNews('asia')">Asia Pacific</div>
+                <div class="chip" onclick="filterNews('emerging')">Emerging Markets</div>
+            </div>
+            <div id="news-feed">
+                <div class="news-item">
+                    <div class="news-source">Federal Reserve</div>
+                    <div class="news-title">Fed Signals Potential Rate Cuts in 2024</div>
+                    <div>Federal Reserve officials indicate possible interest rate reductions as inflation shows signs of cooling.</div>
+                </div>
+                <div class="news-item">
+                    <div class="news-source">ECB</div>
+                    <div class="news-title">European Central Bank Maintains Steady Policy</div>
+                    <div>ECB keeps rates unchanged while monitoring eurozone economic indicators.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interest Rates Dashboard -->
+        <div class="demo-section">
+            <div class="section-title">
+                📊 Interest Rates Dashboard
+            </div>
+            <p>Real-time central bank policy rates from major economies:</p>
+            <div class="feature-grid">
+                <div>
+                    <div class="rate-item">
+                        <span>🇺🇸 Federal Reserve</span>
+                        <span class="rate-value">5.25%</span>
+                    </div>
+                    <div class="rate-item">
+                        <span>🇪🇺 European Central Bank</span>
+                        <span class="rate-value">4.50%</span>
+                    </div>
+                    <div class="rate-item">
+                        <span>🇬🇧 Bank of England</span>
+                        <span class="rate-value">5.25%</span>
+                    </div>
+                    <div class="rate-item">
+                        <span>🇯🇵 Bank of Japan</span>
+                        <span class="rate-value">0.10%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Economic Dashboard -->
+        <div class="demo-section">
+            <div class="section-title">
+                📈 Economic Dashboard
+            </div>
+            <p>Key economic indicators and metrics:</p>
+            <div class="dashboard-grid">
+                <div class="metric-card">
+                    <div class="metric-value">2.1%</div>
+                    <div class="metric-label">US Inflation</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">3.7%</div>
+                    <div class="metric-label">US Unemployment</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">2.8%</div>
+                    <div class="metric-label">EU GDP Growth</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">1.9%</div>
+                    <div class="metric-label">UK Inflation</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Economic Scenarios -->
+        <div class="demo-section">
+            <div class="section-title">
+                🎯 Economic Scenarios Analysis
+            </div>
+            <p>Analyze different market scenarios and their implications:</p>
+            <div class="scenario-card">
+                <div class="scenario-title">📈 Inflation Spike Scenario</div>
+                <div>Rising prices across major economies leading to aggressive central bank responses and potential market volatility.</div>
+            </div>
+            <div class="scenario-card">
+                <div class="scenario-title">📉 Recession Risk Scenario</div>
+                <div>Economic slowdown indicators suggesting potential recession with corresponding monetary policy adjustments.</div>
+            </div>
+            <div class="scenario-card">
+                <div class="scenario-title">💰 Rate Cut Cycle</div>
+                <div>Central banks beginning coordinated rate reduction cycle to stimulate economic growth.</div>
+            </div>
+        </div>
+
+        <!-- Theme & Localization -->
+        <div class="demo-section">
+            <div class="section-title">
+                🎨 Themes & Languages
+            </div>
+            <p>Modern Material 3 design with multiple themes and languages:</p>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>Theme Options</h4>
+                    <div class="theme-selector">
+                        <div class="theme-btn active" onclick="setTheme('light')">🌞 Light</div>
+                        <div class="theme-btn" onclick="setTheme('dark')">🌙 Dark</div>
+                        <div class="theme-btn" onclick="setTheme('auto')">📱 Auto</div>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <h4>Languages</h4>
+                    <div style="margin-top: 12px;">
+                        <div class="chip active">🇺🇸 English</div>
+                        <div class="chip">🇷🇺 Русский</div>
+                        <div class="chip">🇪🇸 Español</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- News Categories -->
+        <div class="demo-section">
+            <div class="section-title">
+                📰 Smart News Categories
+            </div>
+            <p>Filter news by sentiment and economic indicators:</p>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>📈 Positive Economic News</h4>
+                    <p>Growth, recovery, expansion, positive indicators</p>
+                    <div style="margin-top: 12px;">
+                        <div class="chip">Growth</div>
+                        <div class="chip">Recovery</div>
+                        <div class="chip">Expansion</div>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <h4>📉 Negative Economic News</h4>
+                    <p>Recession, decline, negative indicators</p>
+                    <div style="margin-top: 12px;">
+                        <div class="chip">Recession</div>
+                        <div class="chip">Decline</div>
+                        <div class="chip">Crisis</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Platform Availability -->
+        <div class="demo-section">
+            <div class="section-title">
+                📱 Multi-Platform Availability
+            </div>
+            <p>Available across all major platforms:</p>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>📱 Mobile Apps</h4>
+                    <p>Native Android and iOS apps with Flutter</p>
+                    <div style="margin-top: 12px;">
+                        <div class="chip">Android APK</div>
+                        <div class="chip">iOS App</div>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <h4>💻 Desktop & Web</h4>
+                    <p>Windows CLI and web interface</p>
+                    <div style="margin-top: 12px;">
+                        <div class="chip">Windows CLI</div>
+                        <div class="chip">Web App</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function filterNews(region) {
+            // Update active chip
+            document.querySelectorAll('.chip').forEach(chip => {
+                chip.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Mock news filtering
+            const newsFeed = document.getElementById('news-feed');
+            const newsData = {
+                all: [
+                    { source: 'Federal Reserve', title: 'Fed Signals Potential Rate Cuts in 2024', content: 'Federal Reserve officials indicate possible interest rate reductions as inflation shows signs of cooling.' },
+                    { source: 'ECB', title: 'European Central Bank Maintains Steady Policy', content: 'ECB keeps rates unchanged while monitoring eurozone economic indicators.' }
+                ],
+                us: [
+                    { source: 'Federal Reserve', title: 'Fed Signals Potential Rate Cuts in 2024', content: 'Federal Reserve officials indicate possible interest rate reductions as inflation shows signs of cooling.' },
+                    { source: 'CNBC', title: 'US GDP Growth Exceeds Expectations', content: 'American economy shows resilience with stronger than expected quarterly growth.' }
+                ],
+                eu: [
+                    { source: 'ECB', title: 'European Central Bank Maintains Steady Policy', content: 'ECB keeps rates unchanged while monitoring eurozone economic indicators.' },
+                    { source: 'Financial Times', title: 'Eurozone Inflation Continues to Decline', content: 'European inflation rates show continued downward trend across member states.' }
+                ]
+            };
+            
+            const news = newsData[region] || newsData.all;
+            newsFeed.innerHTML = news.map(item => `
+                <div class="news-item">
+                    <div class="news-source">${item.source}</div>
+                    <div class="news-title">${item.title}</div>
+                    <div>${item.content}</div>
+                </div>
+            `).join('');
+        }
+        
+        function setTheme(theme) {
+            document.querySelectorAll('.theme-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Mock theme switching
+            if (theme === 'dark') {
+                document.body.style.background = 'linear-gradient(135deg, #1F2937 0%, #374151 20%, #1F2937 100%)';
+                document.body.style.color = '#F9FAFB';
+            } else {
+                document.body.style.background = 'linear-gradient(135deg, #F5F5F5 0%, #A8C9B7 20%, #F5F5F5 100%)';
+                document.body.style.color = '#1C1C1C';
+            }
+        }
+    </script>
+</body>
+</html>
