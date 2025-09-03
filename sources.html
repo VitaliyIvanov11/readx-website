@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReadX News Sources - Trusted Economic Information</title>
+    <meta name="description" content="Comprehensive list of trusted economic news sources used by ReadX">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #1C1C1C;
+            background: linear-gradient(135deg, #F5F5F5 0%, #A8C9B7 20%, #F5F5F5 100%);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2F4F4F 0%, #3A4A77 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+        }
+        
+        .logo::before {
+            content: "📊";
+            margin-right: 10px;
+            font-size: 2rem;
+        }
+        
+        .sources-section {
+            margin: 40px 0;
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .section-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #2F4F4F;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .sources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 16px;
+        }
+        
+        .source-card {
+            background: #F8FAFC;
+            border: 1px solid #E5E7EB;
+            border-radius: 12px;
+            padding: 16px;
+            transition: transform 0.2s;
+        }
+        
+        .source-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .source-name {
+            font-weight: 600;
+            color: #2F4F4F;
+            margin-bottom: 8px;
+        }
+        
+        .source-type {
+            font-size: 12px;
+            color: #6B7280;
+            background: #E5E7EB;
+            padding: 4px 8px;
+            border-radius: 12px;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+        
+        .source-description {
+            font-size: 14px;
+            color: #4B5563;
+        }
+        
+        .flag {
+            font-size: 20px;
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="/" class="logo">ReadX News Sources</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Central Banks -->
+        <div class="sources-section">
+            <div class="section-title">
+                🏛️ Central Banks & Official Sources
+            </div>
+            <div class="sources-grid">
+                <div class="source-card">
+                    <div class="source-name"><span class="flag">🇺🇸</span>Federal Reserve</div>
+                    <div class="source-type">Official</div>
+                    <div class="source-description">Monetary policy announcements and press releases from the US Federal Reserve</div>
+                </div>
+                <div class="source-card">
+                    <div class="source-name"><span class="flag">🇪🇺</span>European Central Bank</div>
+                    <div class="source-type">Official</div>
+                    <div class="source-description">ECB press releases and monetary policy decisions</div>
+                </div>
+                <div class="source-card">
+                    <div class="source-name"><span class="flag">🇬🇧</span>Bank of England</div>
+                    <div class="source-type">Official</div>
+                    <div class="source-description">Official news and policy updates from the Bank of England</div>
+                </div>
+                <div class="source-card">
+                    <div class="source-name"><span class="flag">🇯🇵</span>Bank of Japan</div>
+                    <div class="source-type">Official</div>
+                    <div class="source-description">BOJ announcements and monetary policy updates</div>
+                </div>
+                <div class="source-card">
+                    <div class="source-name"><span class="flag">🇨🇦</span>Bank of Canada</div>
+                    <div class="source-type">Official</div>
+                    <div class="source-description">Press releases and policy announcements from Bank of Canada</div>
+                </div>
+                <div class="source-card">
+                    <div class="source-name"><span class="flag">🇦🇺</span>Reserve Bank of Australia</div>
+                    <div class="source-type">Official</div>
+                    <div class="source-description">RBA media releases and monetary policy decisions</div>
+                </div>
+                <div class="source-card">
+                    <div class="source-name"><span class="flag">🇷🇺</span>Bank of Russia</div>
+                    <div class="source-type">Official</div>
+                    <div class="source-description">Central Bank of Russia press releases and policy updates</div>
+                </div>
+                <div class="source-card">
+                    <div class="source-name"><span class="flag">🇮🇳</span>Reserve Bank of India</div>
+                    <div class="source-type">Official</div>
+                    <div class="source-description">RBI press releases and monetary policy announcements</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- European National Banks -->
+        <div class="sources-section">
+            <div class="section-title">
+                🇪🇺 European National Banks
+            </div>
+            <div class="sources-grid">
+                <div class="source-card">
+                    <div class="source-name"><span class="flag">🇩🇪</span>Deutsche Bundesbank</div>
+                    <div class="source-type">National Bank</div>
+                    <div class="source-description">German central bank press releases and economic analysis</div>
+                </div>
+                <div class="source-card">
+                    <div class="source-name"><span class="flag">🇫🇷</span>Banque de France</div>
+                    <div class="source-type">National Bank</div>
+                    <div class="source-description">French central bank announcements and economic reports</div>
+                </div>
+                <div class="source-card">
+                    <div class="source-name"><span class="flag">🇮🇹</span>Banca d'Italia</div>
+                    <div class="source-type">National Bank</div>
+                    <div class="source-description">Italian central bank communications and policy updates</div>
+                </div>
+                <div class="source-card">
+                    <div class="source-name"><span class="flag">🇪🇸</span>Banco de España</div>
+                    <div class="source-type">National Bank</div>
+                    <div class="source-description">Spanish central bank press releases and economic data</div>
+                </div>
+                <div class="source-card">
+                    <div class="source-name"><span class="flag">🇳🇱</span>De Nederlandsche Bank</div>
+                    <div class="source-type">National Bank</div>
+                    <div class="source-description">Dutch central bank news and financial stability reports</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- International Financial Media -->
+        <div class="sources-section">
+            <div class="section-title">
+                📰 International Financial Media
+            </div>
+            <div class="sources-grid">
+                <div class="source-card">
+                    <div class="source-name"><span class="flag">🌍</span>Reuters Business</div>
+                    <div class="source-type">News Agency</div>
+                    <div class="source-description">Global business and economic news from Reuters</div>
+                </div>
+                <div class="source-card">
+                    <div class="source-name"><span class="flag">🇺🇸</span>Bloomberg Economics</div>
+                    <div class="source-type">Financial Media</div>
+                    <div class="source-description">Economic analysis and market news from Bloomberg</div>
+                </div>
+                <div class="source-card">
+                    <div class="source-name"><span class="flag">🇬🇧</span>Financial Times</div>
+                    <div class="source-type">Financial Media</div>
+                    <div class="source-description">Central banks and economy coverage from FT</div>
+                </div>
+                <div class="source-card">
+                    <div class="source-name"><span class="flag">🇬🇧</span>The Economist</div>
+                    <div class="source-type">Financial Media</div>
+                    <div class="source-description">Finance & economics analysis from The Economist</div>
+                </div>
+                <div class="source-card">
+                    <div class="source-name"><span class="flag">🇺🇸</span>CNBC Economy</div>
+                    <div class="source-type">Financial Media</div>
+                    <div class="source-description">US and global economic news from CNBC</div>
+                </div>
+                <div class="source-card">
+                    <div class="source-name"><span class="flag">🇺🇸</span>MarketWatch</div>
+                    <div class="source-type">Financial Media</div>
+                    <div class="source-description">Economic news and market analysis</div>
+                </div>
+                <div class="source-card">
+                    <div class="source-name"><span class="flag">🇷🇺</span>RBC Economics</div>
+                    <div class="source-type">Financial Media</div>
+                    <div class="source-description">Russian economic news and analysis</div>
+                </div>
+                <div class="source-card">
+                    <div class="source-name"><span class="flag">🇷🇺</span>Kommersant</div>
+                    <div class="source-type">Financial Media</div>
+                    <div class="source-description">Russian business and economics coverage</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- International Organizations -->
+        <div class="sources-section">
+            <div class="section-title">
+                🌐 International Organizations
+            </div>
+            <div class="sources-grid">
+                <div class="source-card">
+                    <div class="source-name"><span class="flag">🌍</span>International Monetary Fund</div>
+                    <div class="source-type">International Org</div>
+                    <div class="source-description">IMF news, reports and global economic analysis</div>
+                </div>
+                <div class="source-card">
+                    <div class="source-name"><span class="flag">🌍</span>World Bank</div>
+                    <div class="source-type">International Org</div>
+                    <div class="source-description">World Bank news and development economics</div>
+                </div>
+                <div class="source-card">
+                    <div class="source-name"><span class="flag">🌍</span>OECD</div>
+                    <div class="source-type">International Org</div>
+                    <div class="source-description">OECD economic analysis and policy recommendations</div>
+                </div>
+                <div class="source-card">
+                    <div class="source-name"><span class="flag">🌍</span>Bank for International Settlements</div>
+                    <div class="source-type">International Org</div>
+                    <div class="source-description">BIS press releases and central banking research</div>
+                </div>
+                <div class="source-card">
+                    <div class="source-name"><span class="flag">🌍</span>Central Bank News</div>
+                    <div class="source-type">Specialized</div>
+                    <div class="source-description">Specialized coverage of central banking worldwide</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Regional Sources -->
+        <div class="sources-section">
+            <div class="section-title">
+                🌏 Regional & Emerging Markets
+            </div>
+            <div class="sources-grid">
+                <div class="source-card">
+                    <div class="source-name"><span class="flag">🇯🇵</span>Nikkei Asia</div>
+                    <div class="source-type">Regional Media</div>
+                    <div class="source-description">Asian economic news and analysis</div>
+                </div>
+                <div class="source-card">
+                    <div class="source-name"><span class="flag">🇭🇰</span>South China Morning Post</div>
+                    <div class="source-type">Regional Media</div>
+                    <div class="source-description">Business and economic news from Asia</div>
+                </div>
+                <div class="source-card">
+                    <div class="source-name"><span class="flag">🌍</span>Emerging Markets</div>
+                    <div class="source-type">Specialized</div>
+                    <div class="source-description">Dedicated coverage of emerging market economies</div>
+                </div>
+                <div class="source-card">
+                    <div class="source-name"><span class="flag">🇺🇸</span>NPR Economy</div>
+                    <div class="source-type">Public Media</div>
+                    <div class="source-description">Economic news and analysis from NPR</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
